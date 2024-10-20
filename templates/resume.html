@@ -1,11 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <h1>Resume</h1>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block title %} Резюме {% endblock %}
+  {% block content %}
+  <!-- <nav>
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link" href="#about">Про себе</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Освіта</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Навички</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Досвід роботи</a>
+      </li>
+    </ul>
+  </nav> -->
+  <main class="main">
+    <section class="section about" id="about">
+      <div class="about-photo">
+        <img class="photo" src="{{ url_for('static', filename='images/photo1.jpg') }}" alt="Моє фото">
+      </div>
+      <div class="about-info">
+        <h1 class="about-title">Привіт</h1>
+        <h3 class="about-title">Коротко про мене</h3>
+        <p class="about-text">Привіт! Мене звати Артур, і я захоплююся програмуванням. Моя мета – допомагати людям вирішувати складні завдання, створюючи ефективні та креативні рішення. Завжди відкритий до нових викликів і можливостей для розвитку. Вірю, що інновації та постійне вдосконалення – ключі до успіху.</p>
+      </div>
+    </section>
+    <section class="section education">
+      <h1 class="section-title">Освіта</h1>
+    </section>
+    <section class="section skills">
+      <h1 class="section-title">Навички</h1>
+    </section>
+    <section class="section experience">
+      <h1 class="section-title">Досвід роботи</h1>
+    </section>
+  </main>
+  {% endblock %}
