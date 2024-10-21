@@ -1,41 +1,133 @@
 {% extends 'base.html' %}
 {% block title %} Резюме {% endblock %}
-  {% block content %}
-  <!-- <nav>
-    <ul class="nav nav-tabs">
-      <li class="nav-item">
-        <a class="nav-link" href="#about">Про себе</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Освіта</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Навички</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Досвід роботи</a>
-      </li>
-    </ul>
-  </nav> -->
-  <main class="main">
-    <section class="section about" id="about">
-      <div class="about-photo">
-        <img class="photo" src="{{ url_for('static', filename='images/photo1.jpg') }}" alt="Моє фото">
+{% block content %}
+<nav class="nav">
+  <ul class="nav nav-underline">
+    <li class="nav-item">
+      <a class="nav-link"  href="#about">Про себе</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#education">Освіта</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#skills">Навички</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="#projects">Проекти</a>
+    </li>
+  </ul>
+</nav>
+<main class="main">
+  <section class="section about" id="about">
+    <div class="about-photo">
+      <img class="photo" src="{{ url_for('static', filename='images/photo1.jpg') }}" alt="Моє фото">
+    </div>
+    <div class="about-info">
+      <h1 class="about-title">Привіт</h1>
+      <h3 class="about-title">Коротко про мене</h3>
+      <p class="about-text">Привіт! Мене звати Артур, і я захоплююся програмуванням. Моя мета – допомагати людям
+        вирішувати складні завдання, створюючи ефективні та креативні рішення. Завжди відкритий до нових викликів і
+        можливостей для розвитку. Вірю, що інновації та постійне вдосконалення – ключі до успіху.</p>
+    </div>
+  </section>
+  <section class="section education" id="education">
+    <h1 class="section-title">Освіта</h1>
+    <div class="education-cards">
+      <div class="education-card">
+        <img src="{{ url_for('static', filename='images/logoSchool.png') }}" alt="Логотип ліцею">
+        <div class="education-info">
+          <h2>Здобувач повної середньої освіти</h2>
+          <p>Бурштинський ліцей №2</p>
+          <span class="date">2011 - 2022</span>
+        </div>
       </div>
-      <div class="about-info">
-        <h1 class="about-title">Привіт</h1>
-        <h3 class="about-title">Коротко про мене</h3>
-        <p class="about-text">Привіт! Мене звати Артур, і я захоплююся програмуванням. Моя мета – допомагати людям вирішувати складні завдання, створюючи ефективні та креативні рішення. Завжди відкритий до нових викликів і можливостей для розвитку. Вірю, що інновації та постійне вдосконалення – ключі до успіху.</p>
+      <div class="education-card">
+        <img src="{{ url_for('static', filename='images/logoPNU.png') }}" alt="Логотип університету">
+        <div class="education-info">
+          <h2>Бакалавр інженерії програмного забезпечення</h2>
+          <p>Прикарпатський національний університет ім. Василя Стефаника</p>
+          <span class="date">2022 - 2026</span>
+        </div>
       </div>
-    </section>
-    <section class="section education">
-      <h1 class="section-title">Освіта</h1>
-    </section>
-    <section class="section skills">
-      <h1 class="section-title">Навички</h1>
-    </section>
-    <section class="section experience">
-      <h1 class="section-title">Досвід роботи</h1>
-    </section>
-  </main>
-  {% endblock %}
+    </div>
+  </section>
+  
+  <section class="section skills" id="skills">
+    <h1 class="section-title">Навички</h1>
+    <div class="skills-icons">
+      <div class="skill">
+        <img src="{{ url_for('static', filename='images/logoHTML.png') }}" alt="HTML5">
+        <span>HTML5</span>
+      </div>
+      <div class="skill">
+        <img src="{{ url_for('static', filename='images/logoCSS.png') }}" alt="CSS3">
+        <span>CSS3</span>
+      </div>
+      <div class="skill">
+        <img src="{{ url_for('static', filename='images/logoC.png') }}" alt="C++">
+        <span>C++</span>
+      </div>
+      <div class="skill">
+        <img src="{{ url_for('static', filename='images/logoJS.png') }}" alt="JavaScript">
+        <span>JavaScript</span>
+      </div>
+      <div class="skill">
+        <img src="{{ url_for('static', filename='images/logoPython.png') }}" alt="Python">
+        <span>Python</span>
+      </div>
+      <div class="skill">
+        <img src="{{ url_for('static', filename='images/logoGithub.png') }}" alt="GitHub">
+        <span>GitHub</span>
+      </div>
+    </div>
+  </section>
+  
+  <section class="section projects" id="projects">
+    <h1 class="section-title">Мої проекти</h1>
+    <div class="project-cards">
+      <div class="project-card">
+        <div class="project-info">
+          <h2 class="project-title">Проект 1</h2>
+          <p class="project-description">Створена база даних розкладу маршрутів руху транспортних засобів</p>
+          <p class="project-tech">Технології: SQL</p>
+          <a href="https://github.com/ArturVyklynets/DataBase_Vyklynets" class="project-link" target="_blank">GitHub</a>
+        </div>
+      </div>
+  
+      <div class="project-card">
+        <div class="project-info">
+          <h2 class="project-title">Проект 2</h2>
+          <p class="project-description">Зручний веб-сайт для вибору та купівлі велосипеда.</p>
+          <p class="project-tech">Технології: HTML/CSS</p>
+          <a href="https://github.com/ArturVyklynets/layout_landing-page/tree/develop" class="project-link" target="_blank">GitHub</a>
+          <a href="https://arturvyklynets.github.io/layout_landing-page/" class="project-link" target="_blank">Live Demo</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="footer">
+  <div class="footer-container">
+
+    <div class="footer-links">
+      <ul>
+        <li><a href="#about">Про себе</a></li>
+        <li><a href="#education">Освіта</a></li>
+        <li><a href="#skills">Навички</a></li>
+        <li><a href="#projects">Проекти</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-contact">
+      <h3>Контакти</h3>
+      <p>Email: <a href="mailto:artur.vyklynets.22@pnu.edu.ua">artur.vyklynets.22@pnu.edu.ua</a></p>
+      <p>GitHub: <a href="https://github.com/ArturVyklynets" target="_blank">github.com/ArturVyklynets</a></p>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2024 Всі права захищені.</p>
+  </div>
+</footer>
+
+{% endblock %}
