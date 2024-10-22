@@ -8,11 +8,11 @@ posts = [
 
 @post_bp.route('/') 
 def get_posts():
-    return render_template("posts/posts.html", posts=posts)
+    return render_template("posts.html", posts=posts)
 
 @post_bp.route('/<int:id>') 
 def detail_post(id):
     if id > 3:
         abort(404)
     post = posts[id-1]
-    return render_template("posts/detail_post.html", post=post)
+    return render_template("detail_post.html", post=post)
