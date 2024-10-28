@@ -1,7 +1,7 @@
 from . import user_bp
 from flask import render_template, redirect, url_for, render_template, request
 
-@user_bp.route("/hi/<string:name>")
+@user_bp.route("/<string:name>")
 def greetings(name):
    name = name.upper()
    age = request.args.get("age", None, int)

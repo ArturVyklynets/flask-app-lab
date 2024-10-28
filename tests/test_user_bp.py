@@ -1,5 +1,5 @@
 import unittest
-from app import app 
+from app import app
 
 class FlaskAppTestCase(unittest.TestCase):
   def setUp(self):
@@ -14,7 +14,7 @@ class FlaskAppTestCase(unittest.TestCase):
     self.assertIn(b"30", response.data)
   def test_admin_page(self):
     """Тест маршруту /admin, який перенаправляє."""
-    response = self.client.get("/admin", follow_redirects=True)
+    response = self.client.get("/hi/admin", follow_redirects=True)
     self.assertEqual(response.status_code, 200)
     self.assertIn(b"ADMINISTRATOR", response.data)
     self.assertIn(b"45", response.data)

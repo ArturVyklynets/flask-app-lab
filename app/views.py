@@ -1,4 +1,4 @@
-from flask import request, redirect, url_for, render_template, abort
+from flask import request,render_template
 from . import app
 
 @app.route('/')
@@ -11,9 +11,6 @@ def home():
     agent = request.user_agent
 
     return render_template("home.html", agent=agent)
-
-# users
-
 
 @app.route('/resume')
 def resume():
