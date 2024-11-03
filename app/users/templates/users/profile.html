@@ -2,6 +2,50 @@
 {% block title %} Profile Page {% endblock %}
 
 {% block content %}
-<h1>Вітаємо, {{ username }}!</h1>
-<a href="{{url_for('users.logout')}}">Вийти з профілю</a>
+<main>
+  <section class="profile">
+    <h1>Вітаємо, {{ username }}!</h1>
+    <a href="{{url_for('users.logout')}}">Вийти з профілю</a>
+  </section>
+  <section class="addCookies">
+      <form class="addCookie" method="post" action="{{ url_for('users.set_cookie') }}">
+        Ключ кукі<input type="text" name="keyCookie">
+        Значення кукі<input type="text" name="valueCookie">
+        Термін дії<input type="text" name="timeCookie">
+        <button type="submit">Встановити куку</button>
+      </form>
+  </section>
+  <section class="deleteCookiesByKey">
+    <form class="deleteCookieByKey" method="post" action="{{ url_for('users.delete_cookie_by_key') }}">
+      Ключ кукі для видалення<input type="text" name="keyCookie">
+      <button type="submit">Видалити кукі за ключем</button>
+    </form>
+</section>
+<section class="deleteAllCookies">
+  <form class="deleteAllCookie" method="post" action="{{ url_for('users.get_cookie') }}">
+    <button type="submit">Видалити всі кукі</button>
+  </form>
+</section>
+<section class="cookiesTable">
+  <h2>Список куків</h2>
+  <table border="1">
+    <tr>
+      <th>Ключі</th>
+      <th>Значення</th>
+    </tr>
+    {% if cookies %}
+      {% for key, value in cookies %}
+        <tr>
+          <td>{{ key }}</td>
+          <td>{{ value }}</td>
+        </tr>
+      {% endfor %}
+    {% else %}
+      <tr>
+        <td colspan="2">No cookies found.</td>
+      </tr>
+    {% endif %}
+  </table>
+</section>
+</main>
 {% endblock %}
