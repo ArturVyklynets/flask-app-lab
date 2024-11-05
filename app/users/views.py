@@ -4,25 +4,23 @@ from datetime import timedelta, datetime
 
 @user_bp.route("/profile")
 def get_profile():
-    if "username" and "password" in session:
+    if "username" in session:
         username_value = session["username"]
-        password_value = session["password"]
         color_theme = request.cookies.get('color_theme', 'light')
         cookies_data = request.cookies.items() 
     
-        return render_template("profile.html", username=username_value, password=password_value, cookies=cookies_data, color_theme=color_theme)
+        return render_template("profile.html", username=username_value, cookies=cookies_data, color_theme=color_theme)
     flash("Invalid session: You need to log in to access this page.", "danger")
     return redirect(url_for("users.login"))
 
 @user_bp.route("/login" , methods=['GET', 'POST'])
 def login():
-    if "username" and "password" not in session:
+    if "username" not in session:
       if request.method == "POST":
           username = request.form["username"].strip()
           password = request.form["password"].strip()
           if username == 'student' and password == 'studentPass':
             session["username"] = username
-            session["password"] = password
             flash("Success: You have successfully logged in.", "success")
             return redirect(url_for("users.get_profile"))
           else: 
@@ -32,7 +30,6 @@ def login():
 @user_bp.route('/logout')
 def logout():
     session.pop('username', None)
-    session.pop('password', None)
     return redirect(url_for('users.login'))
 
 
