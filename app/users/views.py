@@ -7,27 +7,28 @@ def get_profile():
     if "username" and "password" in session:
         username_value = session["username"]
         password_value = session["password"]
+        color_theme = request.cookies.get('color_theme', 'light')
         cookies_data = request.cookies.items() 
     
-        # return render_template('profile.html', cookies=cookies_data)
-        return render_template("profile.html", username=username_value, password=password_value, cookies=cookies_data)
+        return render_template("profile.html", username=username_value, password=password_value, cookies=cookies_data, color_theme=color_theme)
     flash("Invalid session: You need to log in to access this page.", "danger")
     return redirect(url_for("users.login"))
 
 @user_bp.route("/login" , methods=['GET', 'POST'])
 def login():
-    if request.method == "POST":
-        username = request.form["username"].strip()
-        password = request.form["password"].strip()
-        if username == 'student' and password == 'studentPass':
-          session["username"] = username
-          session["password"] = password
-          flash("Success: You have successfully logged in.", "success")
-          return redirect(url_for("users.get_profile"))
-        else: 
-            flash("Wrong data! Try again!", "danger")
-    return render_template("login.html")
-
+    if "username" and "password" not in session:
+      if request.method == "POST":
+          username = request.form["username"].strip()
+          password = request.form["password"].strip()
+          if username == 'student' and password == 'studentPass':
+            session["username"] = username
+            session["password"] = password
+            flash("Success: You have successfully logged in.", "success")
+            return redirect(url_for("users.get_profile"))
+          else: 
+              flash("Wrong data! Try again!", "danger")
+      return render_template("login.html")
+    return redirect(url_for("users.get_profile"))
 @user_bp.route('/logout')
 def logout():
     session.pop('username', None)
@@ -53,7 +54,7 @@ def set_cookie():
     value = request.form.get('valueCookie')
     time = request.form.get('timeCookie')
     time = int(time)
-    response = make_response('Кука встановлена')
+    response = make_response(redirect(url_for('users.get_profile')))
     response.set_cookie( key, value, max_age=timedelta(seconds=time))
     return response
 
@@ -66,11 +67,21 @@ def get_cookie():
 @user_bp.route('/delete_cookie_by_key', methods=['GET', 'POST'])
 def delete_cookie_by_key():
     key = request.form.get('keyCookie')
-    response = make_response('Кука видалена')
+    response = make_response(redirect(url_for('users.get_profile')))
     response.set_cookie(key, '', expires=0)
+    return response
 
 @user_bp.route('/delete_all_cookies', methods=['GET', 'POST'])
 def delete_all_cookies():
-    response = make_response('Кукі видалено')
+    response = make_response(redirect(url_for('users.get_profile')))
     for cookie in request.cookies:
         response.set_cookie(cookie, '', expires=0)
+    return response
+
+@user_bp.route('/profile/set_color_theme/<string:color>')
+def set_color_theme(color):
+    if color not in ['light', 'dark']:
+        color = 'light'
+    response = make_response(redirect(url_for('users.get_profile')))
+    response.set_cookie('color_theme', color)
+    return response

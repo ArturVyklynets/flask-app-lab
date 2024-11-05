@@ -19,8 +19,45 @@
   color: #fff;
 }
 
+.navbar {
+  background-color: #007bff;
+  padding: 10px 0;
+}
+
+.navbar ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.navbar li {
+  margin: 0 15px;
+}
+
+.navbar a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1em;
+  padding: 5px 10px;
+  transition: background-color 0.3s ease;
+}
+
+.navbar a:hover,
+.navbar a.active {
+  background-color: #0056b3;
+  border-radius: 5px;
+}
+
+
 .main {
-  padding-top: 100px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
 .section {
@@ -272,9 +309,178 @@
   font-size: 14px;
 }
 
+
+
+.nav-list {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  justify-content: end;
+  padding: 10px;
+  gap: 60px;
+}
+
+.ageNotApproved {
+  color: red;
+}
+
+.ageApproved {
+  color: green;
+}
+
+.loginForm {
+  width: 100%;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  font-family: Arial, sans-serif;
+  text-align: center;
+}
+.loginForm h2 {
+  margin-bottom: 20px;
+  color: #333;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+.formButton {
+  width: 40%;
+  align-self: center;
+  padding: 12px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1em;
+  color: #ffffff;
+  background-color: #007bff;
+  transition: background-color 0.3s ease;
+}
+
+.formButton:hover {
+  background-color: #0056b3;
+  cursor: pointer;
+}
+
+/* ///////// */
+
+.profile h1 {
+  font-size: 2em;
+  color: #333;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.profile a {
+  display: block;
+  text-align: center;
+  padding: 5px 10px;
+  background-color: #f44336;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  width: fit-content;
+}
+
+
+form {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fafafa;
+}
+
+form input[type="text"] {
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  font-size: 1em;
+  transition: border-color 0.3s ease;
+}
+
+form input[type="text"]:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+form button[type="submit"] {
+  align-self: center;
+  padding: 10px;
+  font-size: 1em;
+  width: fit-content; 
+}
+
+
+
+.cookiesTable h2 {
+  text-align: center;
+  font-size: 1.5em;
+  color: #333;
+}
+
+.cookiesTable table {
+  margin: 0 auto;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+.cookiesTable th, .cookiesTable td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+
+.cookiesTable th {
+  background-color: #007bff;
+  color: #ffffff;
+}
+
+.cookiesTable tr{
+  background-color: #b7b8b8;
+}
+
+.cookiesTable tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+
+.light {
+  background-color: #ffffff;
+  color: #333333;
+}
+
+
+.dark {
+  background-color: #333333;
+}
+
+.dark p, .dark h1 {
+  color: #f8f9fa;
+}
+
+.chooseColorTheme {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+}
+
+
 @media (max-width: 768px) {
   * {
     font-size: 12px;
+  }
+  .main {
+    padding: 10px;
+  }
+
+  .loginForm {
+    width: 100%;
   }
   .about {
     flex-direction: column;
@@ -307,22 +513,4 @@
 .footer-contact {
     text-align: center;
   }
-}
-
-.nav-list {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  list-style: none;
-  justify-content: end;
-  padding: 10px;
-  gap: 60px;
-}
-
-.ageNotApproved {
-  color: red;
-}
-
-.ageApproved {
-  color: green;
 }

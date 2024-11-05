@@ -2,28 +2,40 @@
 {% block title %} Profile Page {% endblock %}
 
 {% block content %}
-<main>
+<main class="main {{ color_theme }}">
+  <section class="chooseColorTheme">
+    <a href="{{ url_for('users.set_color_theme', color='light') }}" class="btn btn-light">Світла тема</a>
+    <a href="{{ url_for('users.set_color_theme', color='dark') }}" class="btn btn-dark">Темна тема</a>
+  </section>
   <section class="profile">
-    <h1>Вітаємо, {{ username }}!</h1>
-    <a href="{{url_for('users.logout')}}">Вийти з профілю</a>
+    <h1>Ласкаво просимо до сторінки "Профіль", {{ username }}!</h1>
+    <p>Тут ви можете отримати інформацію та вийти з системи</p>
+    <a class="btn btn-danger" href="{{url_for('users.logout')}}">Вийти з профілю</a>
   </section>
   <section class="addCookies">
       <form class="addCookie" method="post" action="{{ url_for('users.set_cookie') }}">
-        Ключ кукі<input type="text" name="keyCookie">
-        Значення кукі<input type="text" name="valueCookie">
-        Термін дії<input type="text" name="timeCookie">
-        <button type="submit">Встановити куку</button>
+        <h2>Додати кукі</h2>
+        <label>Ключ кукі</label>
+        <input type="text" name="keyCookie">
+        <label>Значення кукі</label>
+        <input type="text" name="valueCookie">
+        <label>Термін дії(сек)</label>
+        <input type="text" name="timeCookie">
+        <button type="submit" class="btn btn-success">Встановити куку</button>
       </form>
   </section>
   <section class="deleteCookiesByKey">
     <form class="deleteCookieByKey" method="post" action="{{ url_for('users.delete_cookie_by_key') }}">
-      Ключ кукі для видалення<input type="text" name="keyCookie">
-      <button type="submit">Видалити кукі за ключем</button>
+      <h2>Видалити кукі за ключем</h2>
+      <label>Ключ кукі для видалення</label>
+      <input type="text" name="keyCookie">
+      <button type="submit" class="btn btn-warning">Видалити кукі за ключем</button>
     </form>
 </section>
 <section class="deleteAllCookies">
-  <form class="deleteAllCookie" method="post" action="{{ url_for('users.get_cookie') }}">
-    <button type="submit">Видалити всі кукі</button>
+  <form class="deleteAllCookie" method="post" action="{{ url_for('users.delete_all_cookies') }}">
+    <h2>Видалити всі кукі</h2>
+    <button type="submit" class="btn btn-danger">Видалити всі кукі</button>
   </form>
 </section>
 <section class="cookiesTable">

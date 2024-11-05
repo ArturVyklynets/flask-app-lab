@@ -8,6 +8,22 @@
   <title> {% block title %} {% endblock %} - FlaskApp</title>
 </head>
 <body class="page">
+  <header>
+    <nav class="navbar">
+        <ul>
+            <li><a href="{{ url_for('home') }}">Головна</a></li>
+            <li><a href="{{ url_for('resume') }}">Резюме</a></li>
+            <li><a href="{{ url_for('posts.get_posts') }}">Пости</a></li>
+            {% if 'username' in session %}
+            <li><a href="{{ url_for('users.get_profile') }}">Профіль</a></li>
+            <li><a href="{{ url_for('users.logout') }}">Вихід</a></li>
+        {% else %}
+            <li><a href="{{ url_for('users.login') }}">Вхід</a></li>
+        {% endif %}
+        </ul>
+    </nav>
+</header>
+
   {% with msg = get_flashed_messages(with_categories=True) %}
   {% if msg %}
   {% for category, message in msg %}
