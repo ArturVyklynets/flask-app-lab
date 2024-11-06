@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block title %} Add Post {% endblock %}
+{% block content %}
+
+<form action="" method="post" novalidate>
+  {{ form.hidden_tag() }}
+  {% from 'form_macros.html' import render_field %}
+  {{ render_field(form.title) }}
+  {{ render_field(form.content) }}
+  {{ form.submit(class="btn btn-primary") }}
+</form>
+
+<a href="{{ url_for('posts.get_posts') }}">Return posts</a>
+
+
+{% endblock %}
