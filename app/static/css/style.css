@@ -514,3 +514,202 @@ form button[type="submit"] {
     text-align: center;
   }
 }
+
+.posts-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; 
+  justify-content: center; 
+  padding: 20px;
+}
+.linkForCard {
+  display: block;
+  text-decoration: none; 
+  color: inherit;
+}
+
+.post-card {
+  background-color: #f9f9f9; 
+  border: 1px solid #ddd; 
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  padding: 20px;
+  width: 300px;
+  height: 300px;
+  transition: transform 0.3s ease; 
+}
+
+.post-card:hover {
+  transform: scale(1.05);
+}
+
+.post-title {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.post-content {
+  font-size: 1em;
+  color: #555;
+  margin-bottom: 15px;
+  line-height: 1.5;
+}
+
+.post-category {
+  font-size: 0.9em;
+  font-weight: 600;
+  color: #0073e6;
+  margin-bottom: 8px;
+}
+
+.post-publication-date {
+  font-size: 0.8em;
+  color: #999;
+  margin-bottom: 5px;
+}
+
+.post-author {
+  font-size: 0.9em;
+  color: #666;
+  font-style: italic;
+}
+.mb-4 {
+  text-align: center;
+
+}
+
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background-color: #f8f9fa;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  outline: none;
+}
+
+.form-label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: inline-block;
+}
+
+.btn {
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  border: none;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+  transform: translateY(-2px);
+}
+
+.text-danger {
+  color: #dc3545;
+  font-size: 0.9rem;
+}
+
+.form-check-input {
+  margin-right: 10px;
+  width: 20px;
+}
+
+.form-check-label {
+  font-size: 1rem;
+}
+
+.mt-3 {
+  margin-top: 20px;
+}
+
+.mb-3 {
+  margin-bottom: 15px;
+}
+
+.label-check {
+  display: inline-block;
+  height: fit-content;
+  margin: auto 0;
+}
+
+.form-check {
+  display: flex;
+  flex-direction: row;
+    gap: 30px;
+}
+.posts-title {
+  margin: 30px;
+  text-align: center;
+}
+.text-danger {
+  font-size: 44px;
+}
+
+
+.post-page {
+  width: 100%;
+  padding: 30px 100px;
+} 
+
+.post-page-title {
+  text-align: center;
+  
+  font-size: 2.5em;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.post-page-content {
+  font-size: 1.2em;
+  color: #333;
+  line-height: 1.8;
+  margin-top: 20px;
+}
+
+.post-page-category,
+.post-page-publication-date,
+.post-page-author {
+  font-size: 1em;
+  color: #666;
+  margin-top: 10px;
+}
+
+.post-page-category strong,
+.post-page-publication-date strong,
+.post-page-author strong {
+  color: #444;
+}
+

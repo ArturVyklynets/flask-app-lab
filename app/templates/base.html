@@ -14,6 +14,7 @@
             <li><a href="{{ url_for('home') }}">Головна</a></li>
             <li><a href="{{ url_for('resume') }}">Резюме</a></li>
             <li><a href="{{ url_for('posts.get_posts') }}">Пости</a></li>
+            <li><a href="{{ url_for('posts.add_post') }}">Додати пост</a></li>
             {% if 'username' in session %}
             <li><a href="{{ url_for('users.get_profile') }}">Профіль</a></li>
             <li><a href="{{ url_for('users.logout') }}">Вихід</a></li>

@@ -3,24 +3,26 @@
 {% block title %}POSTS{% endblock %}
 
 {% block content %}
-<h1>Articles</h1>
+{% if posts %}
+<h1 class="posts-title">Пости</h1>
 
-<div class="row row-cols-1 row-cols-md-3 g-4">
-  {% for post in posts %}
-    <div class="col">
-      <div class="card h-100">
-        <div class="card-body">
-          <h5 class="card-title">
-            <a href="{{ url_for('posts.detail_post', id=post['id']) }}">{{ post["title"] }}</a>
-          </h5>
-          <p class="card-text">{{ post["content"] }}</p>
+<div class="posts-container">
+    {% for post in posts %}
+      <a href="{{ url_for('posts.detail_post', id=post['id']) }}" class="linkForCard">
+        <div class="post-card">
+          <h2 class="post-title">{{ post.title }}</h2>
+          <p class="post-content">
+            {{ post.content[:90] }}{% if post.content|length > 200 %}...{% endif %}
+          </p>
+          <p class="post-category">Категорія: {{ post.category }}</p>
+          <p class="post-publication-date">Опубліковано: {{ post.publication_date }}</p>
+          <p class="post-author">Автор: {{ post.author }}</p>
         </div>
-        <div class="card-footer">
-          <small class="text-body-secondary">{{ post["publication_date"] }}</small>
-        </div>
-      </div>
-    </div>
-  {% endfor %}
+      </a>
+    {% endfor %}
+  {% else %}
+  <h1 class="posts-title">Постів немає</h1>
+  {% endif %}
 </div>
 
 {% endblock %}

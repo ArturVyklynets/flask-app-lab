@@ -1,5 +1,6 @@
-import json
+import json, os
 from . import post_bp
+from datetime import datetime
 from flask import render_template, abort, flash, redirect, url_for, session
 from .forms import PostForm
 posts = [
@@ -11,15 +12,22 @@ posts = [
 POSTS_FILE = './app/static/posts/posts.json'
 
 def load_posts():
-    try:
-        with open(POSTS_FILE, 'r') as f:
-            return json.load(f)
-    except (FileNotFoundError, json.JSONDecodeError):
+    if not os.path.exists(POSTS_FILE):
         return []
+    
+    with open(POSTS_FILE, 'r') as f:
+      try:
+          return json.load(f)
+      except json.decoder.JSONDecodeError:
+          print("Error: The JSON file is malformed.")
+          return []
 
 def save_posts(posts):
-    with open(POSTS_FILE, 'w') as f:
-        json.dump(posts, f, indent=4)
+  for post in posts:
+    if isinstance(post.get('publication_date'), datetime):
+        post['publication_date'] = post['publication_date'].strftime('%Y-%m-%d')
+  with open(POSTS_FILE, 'w') as f:
+      json.dump(posts, f, indent=4)
 
 
 @post_bp.route('/add_post', methods=['GET', 'POST'])
@@ -30,7 +38,7 @@ def add_post():
       content = form.content.data
       category = form.category.data
       is_active = form.is_active.data
-      publish_date = form.publish_date.data
+      publish_date =  form.publish_date.data.strftime('%Y-%m-%d')
       author = session.get('username', 'Anonymous')
       current_posts = load_posts()
       new_id = current_posts[-1]['id'] + 1 if current_posts else 1
