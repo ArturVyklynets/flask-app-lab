@@ -2,9 +2,13 @@
 
 {% block title %}POSTS{% endblock %}
 
+{% block css %}
+  <link rel="stylesheet" href="{{ url_for('.static', filename='css/posts.css') }}">
+{% endblock %}
+
 {% block content %}
 {% if posts %}
-<h1 class="posts-title">Пости</h1>
+<h1 class="posts-title myclass">Пости</h1>
 
 <div class="posts-container">
     {% for post in posts %}
@@ -12,7 +16,7 @@
         <div class="post-card">
           <h2 class="post-title">{{ post.title }}</h2>
           <p class="post-content">
-            {{ post.content[:90] }}{% if post.content|length > 200 %}...{% endif %}
+            {{ post.content | truncate(60) }}
           </p>
           <p class="post-category">Категорія: {{ post.category }}</p>
           <p class="post-publication-date">Опубліковано: {{ post.publication_date }}</p>
