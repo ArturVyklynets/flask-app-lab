@@ -13,7 +13,7 @@
     <a class="btn btn-danger" href="{{url_for('users.logout')}}">Вийти з профілю</a>
   </section>
   <section class="addCookies">
-      <form class="addCookie" method="post" action="{{ url_for('users.set_cookie') }}">
+      <form class="addCookie formWithBack" method="post" action="{{ url_for('users.set_cookie') }}">
         <h2>Додати кукі</h2>
         <label>Ключ кукі</label>
         <input type="text" name="keyCookie">
@@ -25,7 +25,7 @@
       </form>
   </section>
   <section class="deleteCookiesByKey">
-    <form class="deleteCookieByKey" method="post" action="{{ url_for('users.delete_cookie_by_key') }}">
+    <form class="deleteCookieByKey formWithBack" method="post" action="{{ url_for('users.delete_cookie_by_key') }}">
       <h2>Видалити кукі за ключем</h2>
       <label>Ключ кукі для видалення</label>
       <input type="text" name="keyCookie">
@@ -33,7 +33,7 @@
     </form>
 </section>
 <section class="deleteAllCookies">
-  <form class="deleteAllCookie" method="post" action="{{ url_for('users.delete_all_cookies') }}">
+  <form class="deleteAllCookie formWithBack" method="post" action="{{ url_for('users.delete_all_cookies') }}">
     <h2>Видалити всі кукі</h2>
     <button type="submit" class="btn btn-danger">Видалити всі кукі</button>
   </form>

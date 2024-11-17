@@ -8,12 +8,18 @@
 
 {% block content %}
 {% if posts %}
-<h1 class="posts-title myclass">Пости</h1>
+<h1 class="posts-title">Пости</h1>
+<div class="containerForAddPost">
+  <form action="{{ url_for('.add_post') }}" class="mb-4">
+    <button type="submit" class="btn btn-primary btnAdd">Додати пост</button>
+  </form>
+</div>
 
 <div class="posts-container">
     {% for post in posts %}
-      <a href="{{ url_for('posts.detail_post', id=post['id']) }}" class="linkForCard">
-        <div class="post-card">
+    <div class="card" style="width: 18rem;">
+      <img src="{{ url_for('.static', filename='img/default.png') }}" class="card-img-top" alt="Дефолтне зображення">
+      <div class="card-body">
           <h2 class="post-title">{{ post.title }}</h2>
           <p class="post-content">
             {{ post.content | truncate(60) }}
@@ -21,8 +27,9 @@
           <p class="post-category">Категорія: {{ post.category }}</p>
           <p class="post-publication-date">Опубліковано: {{ post.publication_date }}</p>
           <p class="post-author">Автор: {{ post.author }}</p>
+          <a href="{{ url_for('posts.detail_post', id=post['id']) }}" class="btn btn-primary">Переглянути</a>
         </div>
-      </a>
+        </div>
     {% endfor %}
   {% else %}
   <h1 class="posts-title">Постів немає</h1>
