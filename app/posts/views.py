@@ -3,6 +3,7 @@ from . import post_bp
 from datetime import datetime
 from flask import render_template, request, abort, flash, redirect, url_for, session
 from .forms import PostForm
+from .models import Post
 from .utils import *
 
 @post_bp.route('/add_post', methods=['GET', 'POST'])

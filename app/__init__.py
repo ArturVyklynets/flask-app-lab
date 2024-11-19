@@ -1,9 +1,21 @@
 from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
+from sqlalchemy.orm import DeclarativeBase
+
+class Base(DeclarativeBase):
+    pass
+
+db = SQLAlchemy(model_class=Base)
+migrate = Migrate()
 
 
-def create_app():
+def create_app(config_name="config"):
   app = Flask(__name__)
-  app.config.from_object("config")
+  app.config.from_object(config_name)
+
+  db.init_app(app)
+  migrate.init_app(app, db)
 
   with app.app_context():
     from . import views
@@ -13,4 +25,7 @@ def create_app():
 
     from app.users import user_bp
     app.register_blueprint(user_bp)
+    from app.posts.models import Post
+    db.create_all()
+
   return app
