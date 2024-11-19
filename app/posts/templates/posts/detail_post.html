@@ -1,17 +1,24 @@
 {% extends 'base.html' %}
 {% block title %} POST {{ post['id'] }} - {{ post["title"] }} {% endblock %}
-
+{% block css %}
+  <link rel="stylesheet" href="{{ url_for('.static', filename='css/posts.css') }}">
+{% endblock %}
 {% block content %}
   <div class="post-page">
     <h1 class="post-page-title">{{ post.title }}</h1>
     
     <p class="post-page-content">{{ post.content }}</p>
-    
-    <p class="post-page-category"><strong>Категорія:</strong> {{ post.category }}</p>
+
+    {% if post.is_active %}
+      <button type="button" class="btn btn-success">Active</button>
+    {% else %}
+      <button type="button" class="btn btn-danger">Inactive</button>
+    {% endif %}
+    <!-- <p class="post-page-category"><strong>Категорія:</strong> {{ post.category }}</p> -->
     
     <p class="post-page-publication-date"><strong>Опубліковано:</strong> {{ post.publication_date }}</p>
-    
-    <p class="post-page-author"><strong>Автор:</strong> {{ post.author }}</p>
+    <!--  -->
+    <!-- <p class="post-page-author"><strong>Автор:</strong> {{ post.author }}</p> -->
     
     <div class="mt-3">
       <a href="{{ url_for('posts.get_posts') }}" class="btn btn-secondary">Return to Posts</a>

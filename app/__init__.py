@@ -25,7 +25,5 @@ def create_app(config_name="config"):
 
     from app.users import user_bp
     app.register_blueprint(user_bp)
-    from app.posts.models import Post
-    db.create_all()
 
   return app

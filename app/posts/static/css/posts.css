@@ -1,3 +1,121 @@
-.myclass {
-  background-color: #bbff00;
+.posts-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; 
+  justify-content: center; 
+  padding: 20px;
+}
+.linkForCard {
+  display: block;
+  text-decoration: none; 
+  color: inherit;
+}
+
+.post-card {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd; 
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  padding: 20px;
+  width: 300px;
+  height: 300px;
+  transition: transform 0.3s ease; 
+}
+
+
+
+.post-card:hover {
+  transform: scale(1.05);
+}
+
+.post-title {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.post-content {
+  font-size: 1em;
+  color: #555;
+  margin-bottom: 15px;
+  line-height: 1.5;
+}
+
+.post-category {
+  font-size: 0.9em;
+  font-weight: 600;
+  color: #0073e6;
+  margin-bottom: 8px;
+}
+
+.post-publication-date {
+  font-size: 0.8em;
+  color: #999;
+  margin-bottom: 5px;
+}
+
+.post-author {
+  font-size: 0.9em;
+  color: #666;
+  font-style: italic;
+}
+.posts-title {
+  margin: 30px;
+  text-align: center;
+}
+.text-danger {
+  font-size: 44px;
+}
+
+
+.post-page {
+  width: 100%;
+  padding: 30px 100px;
+} 
+
+.post-page-title {
+  text-align: center;
+  
+  font-size: 2.5em;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.post-page-content {
+  font-size: 1.2em;
+  color: #333;
+  line-height: 1.8;
+  margin-top: 20px;
+}
+
+.post-page-category,
+.post-page-publication-date,
+.post-page-author {
+  font-size: 1em;
+  color: #666;
+  margin-top: 10px;
+}
+
+.post-page-category strong,
+.post-page-publication-date strong,
+.post-page-author strong {
+  color: #444;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+.btn.btn-success:hover {
+  background-color: #198754;
+  border-color: none;
+  cursor: default;
+}
+
+.btn.btn-danger:hover {
+  background-color: #dc3545;
+  border-color: none;
+  cursor: default;
 }
