@@ -24,9 +24,9 @@
           <p class="post-content">
             {{ post.content | truncate(60) }}
           </p>
-          <!-- <p class="post-category">Категорія: {{ post.category }}</p> -->
+          <p class="post-category">Категорія: {{ post.category }}</p>
           <p class="post-publication-date">Опубліковано: {{ post.publication_date }}</p>
-          <!-- <p class="post-author">Автор: {{ post.author }}</p> -->
+          <p class="post-author">Автор: {{ post.author }}</p>
           <a href="{{ url_for('posts.detail_post', id=post['id']) }}" class="btn btn-primary">Переглянути</a>
         </div>
         </div>
