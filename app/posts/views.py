@@ -37,7 +37,7 @@ def detail_post(id):
     post = db.get_or_404(Post, id)
     return render_template("detail_post.html", post=post)
 
-@post_bp.route('/delete_post/<int:id>') 
+@post_bp.route('/delete_post/<int:id>', methods=['POST'])
 def delete_post(id):
     post = db.get_or_404(Post, id)
     db.session.delete(post)
