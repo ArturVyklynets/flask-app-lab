@@ -1,4 +1,6 @@
 import json, os
+
+from app.users.models import User
 from . import post_bp
 from datetime import datetime
 from flask import render_template, request, abort, flash, redirect, url_for, session
@@ -9,13 +11,15 @@ from app import db
 @post_bp.route('/add_post', methods=['GET', 'POST'])
 def add_post():
     form = PostForm()
+    authors = User.query.all()
+    form.author_id.choices = [(author.id, author.username) for author in authors]
     if form.validate_on_submit():
         title = form.title.data
         content = form.content.data
         is_active = form.is_active.data
         category = form.category.data
         publish_date =  form.publish_date.data
-        author = session.get('username', 'Anonymous')
+        author = form.author_id.choices
         post_new = Post(title=title, content=content, is_active=is_active, category=category, author=author, posted=publish_date)
         db.session.add(post_new)
         db.session.commit()

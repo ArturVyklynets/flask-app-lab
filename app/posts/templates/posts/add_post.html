@@ -30,6 +30,11 @@
           {{ form.is_active(class="form-control form-check-input") }}
       </div>
 
+      <div class="mb-3">
+        <label for="author_id" class="form-label">Виберіть автора</label>
+        {{ form.author_id(class="form-control") }}
+    </div>
+
         <div class="mb-3">
             {{ render_field(form.publish_date, 'form-control') }}
         </div>

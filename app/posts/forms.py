@@ -12,4 +12,5 @@ class PostForm(FlaskForm):
   publish_date = DateTimeLocalField('Publish Date',
                            format="%Y-%m-%dT%H:%M", default=dt.now())
   category = SelectField('Category', choices=CATEGORIES, validators=[DataRequired()])
+  author_id = SelectField('Author', coerce=int)
   submit = SubmitField('Add Post')
