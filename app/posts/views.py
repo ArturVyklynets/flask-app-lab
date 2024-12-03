@@ -1,6 +1,7 @@
 import json, os
 
 from app.users.models import User
+from .models import Tag
 from . import post_bp
 from datetime import datetime
 from flask import render_template, request, abort, flash, redirect, url_for, session
@@ -12,22 +13,39 @@ from app import db
 def add_post():
     form = PostForm()
     authors = User.query.all()
+    tags = Tag.query.all()
+    
     form.author_id.choices = [(author.id, author.username) for author in authors]
+    form.tags.choices = [(tag.id, tag.name) for tag in tags]
+    
     if form.validate_on_submit():
         title = form.title.data
         content = form.content.data
         is_active = form.is_active.data
         category = form.category.data
-        publish_date =  form.publish_date.data
-        author = form.author_id.choices
-        post_new = Post(title=title, content=content, is_active=is_active, category=category, author=author, posted=publish_date)
+        publish_date = form.publish_date.data
+        author_id = form.author_id.data
+        
+        post_tags = [tag for tag_id in form.tags.data if (tag := Tag.query.get(tag_id)) is not None]
+
+        post_new = Post(
+            title=title,
+            content=content,
+            is_active=is_active,
+            category=category,
+            author_id=author_id,
+            posted=publish_date,
+            tags=post_tags
+        )
+        
         db.session.add(post_new)
         db.session.commit()
-        flash(f'Post {title} added successfully!', 'success')
+        flash(f'Post "{title}" added successfully!', 'success')
         return redirect(url_for('.add_post'))
+    
     elif form.errors:
-        flash(f"Enter the correct data in the form!", "danger")
-   
+        flash("Enter the correct data in the form!", "danger")
+    
     return render_template("add_post.html", form=form, edit=False)
 
 @post_bp.route('/') 
@@ -48,20 +66,33 @@ def delete_post(id):
     db.session.commit()
     return redirect(url_for('.get_posts'))
 
-@post_bp.route('/edit_post/<int:id>', methods=['GET', 'POST']) 
+@post_bp.route('/edit_post/<int:id>', methods=['GET', 'POST'])
 def edit_post(id):
     post = db.get_or_404(Post, id)
     form = PostForm(obj=post)
     form.publish_date.data = post.posted
+    authors = User.query.all()
+    tags = Tag.query.all()
+    form.author_id.choices = [(author.id, author.username) for author in authors]
+    form.tags.choices = [(tag.id, tag.name) for tag in tags]
+    
     if form.validate_on_submit():
         post.title = form.title.data
         post.content = form.content.data
         post.is_active = form.is_active.data
         post.category = form.category.data
         post.posted = form.publish_date.data
+        post.author_id = form.author_id.data
+        
+        post.tags.clear()
+        post_tags = [tag for tag_id in form.tags.data if (tag := Tag.query.get(tag_id)) is not None]
+        post.tags.extend(post_tags)
+        
         db.session.commit()
         flash(f'Post updated successfully!', 'success')
         return redirect(url_for('.get_posts'))
+    
     elif form.errors:
         flash(f"Enter the correct data in the form!", "danger")
+    
     return render_template("add_post.html", form=form, edit=True)
