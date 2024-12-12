@@ -17,10 +17,13 @@
             <li><a href="{{ url_for('resume') }}">Резюме</a></li>
             <li><a href="{{ url_for('posts.get_posts') }}">Пости</a></li>
             <li><a href="{{ url_for('posts.add_post') }}">Додати пост</a></li>
-            {% if 'username' in session %}
+            {% if current_user.is_authenticated %}
             <li><a href="{{ url_for('users.get_profile') }}">Профіль</a></li>
+            <li><a href="{{ url_for('users.get_all_registered_users') }}">Список юзерів</a></li>
+            <li><a href="{{ url_for('users.get_account') }}">Акаунт</a></li>
             <li><a href="{{ url_for('users.logout') }}">Вихід</a></li>
         {% else %}
+            <li><a href="{{ url_for('users.register') }}">Реєстрація</a></li>
             <li><a href="{{ url_for('users.login') }}">Вхід</a></li>
         {% endif %}
         </ul>

@@ -1,11 +1,15 @@
 import unittest
-from app import app
+from app import create_app, db
 
 class FlaskAppTestCase(unittest.TestCase):
   def setUp(self):
     """Налаштування клієнта тестування перед кожним тестом."""
-    app.config["TESTING"] = True
-    self.client = app.test_client()
+    self.app = create_app("test") 
+    print(self.app.config["SQLALCHEMY_DATABASE_URI"])
+    self.client = self.app.test_client()
+    self.ctx = self.app.app_context()
+    self.ctx.push()
+    db.create_all()
   def test_greetings_page(self):
     """Тест маршруту /hi/<name>."""
     response = self.client.get("/hi/John?age=30")

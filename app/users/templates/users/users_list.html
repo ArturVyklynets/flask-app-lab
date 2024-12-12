@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %} Список зареєстрованих користувачів {% endblock %}
+
+{% block css %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/table.css') }}">
+{% endblock %}
+
+{% block content %}
+<main class="main {{ color_theme }}">
+  <section class="users">
+    <h1>Список користувачів</h1>
+
+    {% if users %}
+    <p>Загальна кількість користувачів: {{ count }}</p>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Ім'я користувача</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.email }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <h2>Немає зареєстрованих користувачів.</h2>
+    {% endif %}
+  </section>
+</main>
+{% endblock %}

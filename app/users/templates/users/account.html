@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %} {{ title }} {% endblock %}
+
+{% block content %}
+<main class="main {{ color_theme }}">
+  <section class="account">
+    <h1>Ласкаво просимо до сторінки Account, {{ user.username }}!</h1>
+    <p>Пошта реєстрації: {{ user.email }}</p>
+    <p>Тут ви можете отримати інформацію та вийти з системи</p>
+    <a class="btn btn-danger" href="{{url_for('users.logout')}}">Вийти з профілю</a>
+  </section>
+</main>
+{% endblock %}
