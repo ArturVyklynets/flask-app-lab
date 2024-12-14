@@ -11,6 +11,8 @@ class Config:
     TESTING = False
     SECRET_KEY = "secret-key-sdsfs"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    UPLOAD_FOLDER = os.path.join(basedir, 'app/users/static/img')
+    MAX_CONTENT_LENGTH = 2 * 1024 * 1024
 
 class DevConfig(Config):
     SQLALCHEMY_DATABASE_URI = 'sqlite:///data.sqlite'

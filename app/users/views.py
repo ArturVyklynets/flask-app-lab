@@ -1,9 +1,12 @@
 from .models import User
-from .forms import RegistrationForm, LoginForm
+from .forms import RegistrationForm, LoginForm, UpdateAccountForm
 from flask_login import login_user, logout_user, current_user, login_required
 from . import user_bp
 from flask import render_template, redirect, request, url_for, make_response, session, flash
 from datetime import timedelta, datetime
+import os
+from flask import current_app
+from werkzeug.utils import secure_filename
 from app import db
 
 @user_bp.route("/profile")
@@ -59,6 +62,29 @@ def login():
 @login_required
 def get_account():
     return render_template("account.html", title="Account", user=current_user)
+
+@user_bp.route('/edit_account/<int:id>', methods=['GET', 'POST'])
+@login_required
+def edit_account(id):
+    user = db.get_or_404(User, id)
+    form = UpdateAccountForm(obj=user)
+    if form.validate_on_submit():
+        # todo
+        user.username = form.username.data
+        user.email = form.email.data
+        if form.image_file.data:
+            file = form.image_file.data
+            filename = secure_filename(file.filename)
+            file_path = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
+            file.save(file_path)
+            user.image_file = filename
+        db.session.commit()
+        flash(f'Account updated successfully!', 'success')
+        return redirect(url_for('.get_account'))
+    
+    elif form.errors:
+        flash(f"Enter the correct data in the form!", "danger")
+    return render_template("edit_account.html", title="Edit Account", form=form, edit=True)
 
 @user_bp.route('/users')
 @login_required
