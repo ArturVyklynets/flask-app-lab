@@ -18,6 +18,7 @@
                     <th>ID</th>
                     <th>Ім'я користувача</th>
                     <th>Email</th>
+                    <th>Last Seen</th>
                 </tr>
             </thead>
             <tbody>
@@ -26,6 +27,7 @@
                         <td>{{ user.id }}</td>
                         <td>{{ user.username }}</td>
                         <td>{{ user.email }}</td>
+                        <td>{{ user.last_seen.strftime('%Y-%m-%d %H:%M:%S') }}</td>
                     </tr>
                 {% endfor %}
             </tbody>

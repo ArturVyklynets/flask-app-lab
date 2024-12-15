@@ -1,25 +1,43 @@
 {% extends 'base.html' %}
 
 {% block title %} {{ title }} {% endblock %}
+{% block css %}
+<script src="{{ url_for('.static', filename='js/textarea.js') }}"></script>
+{% endblock %}
 {% block content %}
 
 <div class="container mt-5">
-    <form class="formWithBack" action="" method="post" novalidate>
-        {{ form.hidden_tag() }}
-        
-        <div class="mb-3">
-            {% from 'form_macros.html' import render_field %}
-            {{ render_field(form.username, 'form-control') }}
-        </div>
+  <form class="formWithBack" action="" method="post" novalidate enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    <h1>Account info</h1>
+    <div class="mb-3">
+      {% from 'form_macros.html' import render_field %}
+      {{ render_field(form.username, 'form-control') }}
+    </div>
 
-        <div class="mb-3">
-            {{ render_field(form.email, 'form-control') }}
-        </div>
-        <div class="mb-3">
-          {{ render_field(form.image_file, 'form-control') }}
-      </div>
-        <button type="submit" class="btn btn-primary">Update</button>
-    </form>
+    <div class="mb-3">
+      {{ render_field(form.email, 'form-control') }}
+    </div>
+    <div class="mb-3 about-me-input">
+      {{ render_field(form.about_me, 'form-control') }}
+    </div>
+    <div class="mb-3">
+      {{ render_field(form.image_file, 'form-control') }}
+    </div>
+
+    <div class="mb-3">
+      {{ render_field(form.old_password, 'form-control') }}
+    </div>
+
+    <div class="mb-3">
+      {{ render_field(form.new_password, 'form-control') }}
+    </div>
+
+    <div class="mb-3">
+      {{ render_field(form.confirm_password, 'form-control') }}
+    </div>
+    <button type="submit" class="btn btn-primary">Update</button>
+  </form>
 </div>
 
 {% endblock %}

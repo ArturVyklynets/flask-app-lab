@@ -1,5 +1,6 @@
 from app import db, bcrypt, login_manager
 from flask_login import UserMixin
+from datetime import datetime,  timedelta
 
 @login_manager.user_loader
 def user_loader(user_id):
@@ -13,6 +14,8 @@ class User(db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False)
     image_file = db.Column(db.String(20), nullable=True, default='default.png')
     password = db.Column(db.String(60), nullable=False)
+    about_me = db.Column(db.String(500), nullable=True)
+    last_seen = db.Column(db.DateTime, default=lambda: datetime.utcnow() + timedelta(hours=2), nullable=False)
     active = db.Column(db.Boolean, default=True)
 
     def __repr__(self):

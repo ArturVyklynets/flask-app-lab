@@ -4,14 +4,28 @@
 {% block css %}
   <link rel="stylesheet" href="{{ url_for('.static', filename='css/account.css') }}">
 {% endblock %}
+
 {% block content %}
 <main class="main {{ color_theme }}">
   <section class="account">
-    <div class="img-wrap"><img src="{{ url_for('.static', filename='img/default.png') }}" class="card-img-top" alt="Дефолтне зображення"></div>
+    <div class="img-wrap">
+      <img src="{{ url_for('.static', filename='img/' + user.image_file) }}" class="card-img-top"
+        alt="Дефолтне зображення">
+    </div>
     <h1>Ласкаво просимо до сторінки Account, {{ user.username }}!</h1>
+    <p>Остання активність: {{ user.last_seen.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+    <p>Про мене:
+      {% if user.about_me and user.about_me.strip() %}
+        {{ user.about_me }}
+      {% else %}
+        Немає інформації
+      {% endif %}
+    </p>
     <p>Пошта реєстрації: {{ user.email }}</p>
     <p>Тут ви можете отримати інформацію та вийти з системи</p>
-    <a class="btn btn-danger" href="{{url_for('users.logout')}}">Вийти з профілю</a>
+    <div><a class="btn btn-warning mb-3" href="{{url_for('users.edit_account', id=user.id)}}">Редагувати акаунт</a>
+    </div>
+    <div><a class="btn btn-danger" href="{{url_for('users.logout')}}">Вийти з профілю</a></div>
   </section>
 </main>
 {% endblock %}

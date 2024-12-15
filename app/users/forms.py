@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, FileField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, FileField, TextAreaField
 from flask_wtf.file import FileAllowed
 from wtforms.validators import DataRequired, Email, Length, EqualTo, ValidationError, Regexp
 from .models import User
@@ -47,12 +47,17 @@ class UpdateAccountForm(FlaskForm):
     DataRequired(), Email()
   ])
 
+  old_password = PasswordField('Old Password')
+  new_password = PasswordField('New Password')
+  confirm_password = PasswordField('Confirm Password', validators=[
+    EqualTo('new_password',  message="Confirm Password must match New Password")
+  ])
   image_file = FileField('Update Account Picture', validators=[
         FileAllowed(['jpg', 'png', 'jpeg'], 'Images only!')
     ])
+  about_me = TextAreaField('About Me', validators=[
+        Length(max=500, message="About Me cannot exceed 500 characters.")
+    ])
 
+  last_seen = StringField('Last Seen', render_kw={'readonly': True})
   submit = SubmitField('Update')
-  def validate_email(self, email):
-    user = User.query.filter_by(email=email.data).first()
-    if user:
-      raise ValidationError('Email is already registered.')

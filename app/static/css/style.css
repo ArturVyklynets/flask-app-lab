@@ -472,6 +472,11 @@ form button[type="submit"] {
   gap: 40px;
 }
 
+#about_me {
+  min-height: 200px;
+  overflow-y: auto;
+  resize: none;
+}
 
 @media (max-width: 768px) {
   * {

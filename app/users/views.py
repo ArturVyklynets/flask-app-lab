@@ -7,6 +7,7 @@ from datetime import timedelta, datetime
 import os
 from flask import current_app
 from werkzeug.utils import secure_filename
+from werkzeug.datastructures import FileStorage
 from app import db
 
 @user_bp.route("/profile")
@@ -61,6 +62,9 @@ def login():
 @user_bp.route('/account', methods=['GET', 'POST'])
 @login_required
 def get_account():
+    local_time = datetime.utcnow() + timedelta(hours=2)
+    current_user.last_seen = local_time
+    db.session.commit()
     return render_template("account.html", title="Account", user=current_user)
 
 @user_bp.route('/edit_account/<int:id>', methods=['GET', 'POST'])
@@ -69,15 +73,48 @@ def edit_account(id):
     user = db.get_or_404(User, id)
     form = UpdateAccountForm(obj=user)
     if form.validate_on_submit():
-        # todo
+        # username
         user.username = form.username.data
-        user.email = form.email.data
-        if form.image_file.data:
-            file = form.image_file.data
+
+        # check_email
+        if form.email.data != user.email:
+            existing_user = User.query.filter_by(email=form.email.data).first()
+            if existing_user:
+                flash("Email is already registered.", "danger")
+                return redirect(url_for('.edit_account', id=user.id))
+            else:
+                user.email = form.email.data
+
+        # about_me 
+        user.about_me = form.about_me.data
+
+        # image
+        file = form.image_file.data
+        if file:
+          if isinstance(file, FileStorage): 
             filename = secure_filename(file.filename)
             file_path = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
             file.save(file_path)
             user.image_file = filename
+          else:
+            flash("No file selected!", "danger")
+
+        # passwords
+        if form.new_password.data and form.old_password.data and form.confirm_password.data:
+          if form.old_password.data and user.check_password(form.old_password.data):
+              if form.old_password.data != form.new_password.data:
+                  if len(form.new_password.data) > 5:
+                    user.password = User.hash_password(form.new_password.data)
+                  else: 
+                      flash("New password must be at least 6 characters.", "danger")
+                      return redirect(url_for('.edit_account', id=user.id))
+              else:
+                  flash("New password is the same as old.", "danger")
+                  return redirect(url_for('.edit_account', id=user.id))
+          else:
+              flash("Old password is incorrect.", "danger")
+              return redirect(url_for('.edit_account', id=user.id))
+
         db.session.commit()
         flash(f'Account updated successfully!', 'success')
         return redirect(url_for('.get_account'))
